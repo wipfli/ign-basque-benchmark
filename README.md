@@ -13,11 +13,14 @@ The IGN benchmark shapefiles use probably IGN network data. The goal here is to 
 
 ## Steps
 
-1. Buffer IGN final roads in QGIS with 5 m.
-1. Load OSM extract.
-1. Intersect OSM with IGN buffered poylgons.
-1. Save as "clipped-osm.gpkg".
-1. Run `python3 select.py`.
+- Buffer IGN final roads in QGIS with 5 m.
+- Load OSM extract with:
+  - Download planet.osm.pbf
+  - `./extract.sh`
+  - Open `basque-highway.osm.pbf` in QGIS and save as `osm.gpkg`
+- Intersect OSM with IGN buffered poylgons.
+- Save as "clipped-osm.gpkg".
+- Run `python3 select.py`.
 
 ## License
 
