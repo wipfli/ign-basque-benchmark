@@ -2,7 +2,7 @@ import geopandas as gpd
 from shapely.geometry import MultiLineString
 import matplotlib.pyplot as plt
 
-gdf = gpd.read_file("osm-clipped.gpkg", layer="osm")
+gdf = gpd.read_file("osm-clipped.gpkg", layer="osm-clipped")
 
 clipped_lengths = {}
 for idx, row in gdf.iterrows():
@@ -10,7 +10,10 @@ for idx, row in gdf.iterrows():
     if isinstance(geometry, MultiLineString):
         total_length = sum(line.length for line in geometry.geoms)  # Sum the lengths of LineStrings
         # print(f"osm_id: {row['osm_id']}, Total Length of Lines: {total_length}")
-        clipped_lengths[row['osm_id']] = total_length
+        if row['osm_id'] in clipped_lengths:
+            clipped_lengths[row['osm_id']] += total_length
+        else:
+            clipped_lengths[row['osm_id']] = total_length
     else:
         print(f"osm_id: {row['osm_id']} has a different geometry type: {type(geometry)}")
 
@@ -21,7 +24,10 @@ lengths = {}
 for idx, row in gdf.iterrows():
     geometry = row.geometry
     # print(geometry.length)
-    lengths[row['osm_id']] = geometry.length
+    if row['osm_id'] in lengths:
+        lengths[row['osm_id']] += geometry.length
+    else:
+        lengths[row['osm_id']] = geometry.length
 
 # # Plot the histogram
 # plt.hist(lengths.values(), bins=10, range=(0.0, 0.001), edgecolor='black')
