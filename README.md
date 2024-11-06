@@ -13,6 +13,7 @@ The IGN benchmark shapefiles use probably IGN network data. The goal here is to 
 
 ## Steps
 
+- Create `roads_final_with_ini.gpkg` with `python3 finalToIni.py`
 - Buffer IGN final roads in QGIS with 5 m.
 - Load OSM extract with:
   - Download planet.osm.pbf
@@ -28,6 +29,6 @@ The IGN benchmark shapefiles use probably IGN network data. The goal here is to 
   - filtered_output.gpkg
   - osm.gpkg
   - osm-clipped.gpkg
-- IGN shapefiles as CC-BY https://zenodo.org/records/5744120
+- IGN `roads_*` as CC-BY https://zenodo.org/records/5744120
 - Code as MIT
 
